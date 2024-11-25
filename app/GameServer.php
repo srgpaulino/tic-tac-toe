@@ -40,7 +40,7 @@ class GameServer implements MessageComponentInterface
 
                 $serverHost = $this->getServerHost();
                 //get a shareable link
-                $shareableLink = "$serverHost/join.html?gameId=$gameId";
+                $shareableLink = "$serverHost/public/index.html?gameId=$gameId";
 
                 $from->send(json_encode([
                     'action' => 'created',
@@ -146,7 +146,7 @@ class GameServer implements MessageComponentInterface
      */
     private function getServerHost()
     {
-        return "http://localhost:8081"; // Adjust as per your frontend server address
+        return "https://srgpaulino.github.io"; // Adjust as per your frontend server address
     }
 }
 
@@ -166,5 +166,5 @@ $server = IoServer::factory(
     $port
 );
 
-echo "WebSocket server started on ws://localhost:8080\n";
+echo "WebSocket server started on wss://spaulino-tictactoe-30674857a67d.herokuapp.com\n";
 $server->run();
