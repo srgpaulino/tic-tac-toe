@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="6" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.007627">
+    <testsuite name="TicTacToe Tests" tests="6" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.007627">
+      <testsuite name="GameHandlerTest" file="D:\Projects\tic-tac-toe\tests\GameHandlerTest.php" tests="6" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.007627">
+        <testcase name="testAlternatingTurns" class="GameHandlerTest" classname="GameHandlerTest" file="D:\Projects\tic-tac-toe\tests\GameHandlerTest.php" line="8" assertions="2" time="0.006548"/>
+        <testcase name="testInvalidMove" class="GameHandlerTest" classname="GameHandlerTest" file="D:\Projects\tic-tac-toe\tests\GameHandlerTest.php" line="19" assertions="2" time="0.000349"/>
+        <testcase name="testWinningConditionForRows" class="GameHandlerTest" classname="GameHandlerTest" file="D:\Projects\tic-tac-toe\tests\GameHandlerTest.php" line="28" assertions="1" time="0.000040"/>
+        <testcase name="testWinningConditionForColumns" class="GameHandlerTest" classname="GameHandlerTest" file="D:\Projects\tic-tac-toe\tests\GameHandlerTest.php" line="40" assertions="1" time="0.000042"/>
+        <testcase name="testWinningConditionForDiagonals" class="GameHandlerTest" classname="GameHandlerTest" file="D:\Projects\tic-tac-toe\tests\GameHandlerTest.php" line="52" assertions="1" time="0.000031"/>
+        <testcase name="testDrawCondition" class="GameHandlerTest" classname="GameHandlerTest" file="D:\Projects\tic-tac-toe\tests\GameHandlerTest.php" line="64" assertions="2" time="0.000616"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

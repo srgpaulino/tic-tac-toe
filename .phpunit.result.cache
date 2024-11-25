@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"GameHandlerTest::testAlternatingTurns":0.007,"GameHandlerTest::testInvalidMove":0,"GameHandlerTest::testWinningConditionForRows":0,"GameHandlerTest::testWinningConditionForColumns":0,"GameHandlerTest::testWinningConditionForDiagonals":0,"GameHandlerTest::testDrawCondition":0.001}}

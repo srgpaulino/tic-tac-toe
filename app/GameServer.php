@@ -29,6 +29,7 @@ class GameServer implements MessageComponentInterface
     public function onMessage(ConnectionInterface $from, $msg)
     {
         $data = json_decode($msg, true);
+        $gameId = $data['gameId'] ?? null;
 
         switch ($data['action']) {
             case 'create':
@@ -36,15 +37,19 @@ class GameServer implements MessageComponentInterface
                 $gameId = uniqid();
 
                 $this->games[$gameId] = new GameHandler();
-                $this->playerMap[$from->resourceId] = $gameId;
+                $this->playerMap[$from->resourceId] = [
+                    'gameId' => $gameId,
+                    'role' => 'X'
+                ];
 
                 $serverHost = $this->getServerHost();
                 //get a shareable link
-                $shareableLink = "$serverHost/public/index.html?gameId=$gameId";
+                $shareableLink = "$serverHost?gameId=$gameId";
 
                 $from->send(json_encode([
                     'action' => 'created',
                     'gameId' => $gameId,
+                    'message' => 'Game created. Waiting for a second player...',
                     'shareableLink' => $shareableLink
                 ]));
 
@@ -52,12 +57,38 @@ class GameServer implements MessageComponentInterface
                 break;
 
             case 'join':
-                $gameId = $data['gameId'] ?? null;
-                if ($gameId && isset($this->games[$gameId])) {
-                    $this->playerMap[$from->resourceId] = $gameId;
-                    $from->send(json_encode(['action' => 'joined', 'gameId' => $gameId]));
+                if (isset($this->games[$gameId])) {
+                    $game = $this->games[$gameId];
+    
+                    if (count($this->playerMap) < 2) {
+                        $this->playerMap[$from->resourceId] = [
+                            'gameId' => $gameId,
+                            'role' => 'O'
+                        ];
+    
+                        // Notify both players that the game has started
+                        foreach ($this->clients as $client) {
+                            $role = $this->playerMap[$client->resourceId]['role'] ?? null;
+                            if ($role) {
+                                $client->send(json_encode([
+                                    'action' => 'started',
+                                    'board' => $game->board,
+                                    'role' => $role,
+                                    'currentPlayer' => $game->currentPlayer
+                                ]));
+                            }
+                        }
+                    } else {
+                        $from->send(json_encode([
+                            'action' => 'error',
+                            'message' => 'Game is already full.'
+                        ]));
+                    }
                 } else {
-                    $from->send(json_encode(['action' => 'error', 'message' => 'Game not found']));
+                    $from->send(json_encode([
+                        'action' => 'error',
+                        'message' => 'Game does not exist.'
+                    ]));
                 }
                 break;
 
@@ -68,7 +99,7 @@ class GameServer implements MessageComponentInterface
 
                     $game = $this->games[$gameId];
                     $from->send(json_encode([
-                        'action' => 'update',
+                        'action' => 'updated',
                         'gameId' => $gameId,
                         'board' => $game->board,
                         'currentPlayer' => $game->currentPlayer
@@ -91,11 +122,12 @@ class GameServer implements MessageComponentInterface
 
                         foreach ($this->clients as $client) {
                             $client->send(json_encode([
-                                'action' => 'update',
+                                'action' => 'updated',
                                 'gameId' => $gameId,
                                 'board' => $game->board,
                                 'currentPlayer' => $game->currentPlayer,
-                                'winner' => $winner,
+                                'winner' => $winner[0],
+                                'winnerCombo' => $winner[1],
                                 'isDraw' => $isDraw
                             ]));
                         }
@@ -115,7 +147,7 @@ class GameServer implements MessageComponentInterface
 
                     foreach ($this->clients as $client) {
                         $client->send(json_encode([
-                            'action' => 'update',
+                            'action' => 'updated',
                             'gameId' => $gameId,
                             'board' => $this->games[$gameId]->board,
                             'currentPlayer' => $this->games[$gameId]->currentPlayer
@@ -146,7 +178,7 @@ class GameServer implements MessageComponentInterface
      */
     private function getServerHost()
     {
-        return "https://srgpaulino.github.io"; // Adjust as per your frontend server address
+        return getenv('APP_URL'); // Adjust as per your frontend server address
     }
 }
 
@@ -155,7 +187,7 @@ use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 
-$port = getenv('PORT') ?: 8080; // Use Heroku's assigned port or default to 8080
+$port = getenv('WS_PORT') ?: 8080; // Use Heroku's assigned port or default to 8080
 
 $server = IoServer::factory(
     new HttpServer(
@@ -166,5 +198,5 @@ $server = IoServer::factory(
     $port
 );
 
-echo "WebSocket server started on wss://spaulino-tictactoe-30674857a67d.herokuapp.com\n";
+echo "WebSocket server started on getenv('WS_HOST')\n";
 $server->run();

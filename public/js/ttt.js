@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    const socket = new WebSocket('wss://spaulino-tictactoe-30674857a67d.herokuapp.com');
+    const socket = new WebSocket('ws://localhost:8080');
     let gameId = null;
     let currentPlayer = 'X';
+    let playerRole = null;
     let board = ['', '', '', '', '', '', '', '', ''];
 
     // Function to update the Game ID title
@@ -12,13 +13,14 @@ $(document).ready(function () {
     // Render the game board dynamically
     function renderBoard() {
         $('#game-board').empty();
+        console.log('rendering Board: ' + board);
         board.forEach((cell, index) => {
             const cellDiv = $('<div>')
                 .addClass('cell')
                 .attr('data-index', index)
                 .text(cell)
                 .click(function () {
-                    if (cell === '' && currentPlayer === 'X') {
+                    if (cell === '' && currentPlayer === playerRole) {
                         socket.send(JSON.stringify({
                             action: 'move',
                             gameId: gameId,
@@ -42,6 +44,13 @@ $(document).ready(function () {
         $('#game-status').html(message);
     }
 
+    function displayPlayerRole(role) {
+        const playerRoleElement = document.querySelector('#player-role'); // Assuming an element with ID 'player-role'
+        if (playerRoleElement) {
+            playerRoleElement.textContent = `You are Player ${role}`;
+        }
+    }
+
     // WebSocket Event Handlers
     socket.onopen = function () {
         if (gameId) {
@@ -63,18 +72,21 @@ $(document).ready(function () {
                 gameId = data.gameId;
                 const shareableLink = data.shareableLink;
                 updateGameIdTitle(gameId);
-                updateStatus(`Game created! Share this <a href="${shareableLink}" target="_blank">link</a>`);
+                updateStatus(data.message + ` Share this <a href="${shareableLink}" target="_blank">link</a> with them`);
                 break;
 
             case 'joined':
+                
                 gameId = data.gameId;
                 updateGameIdTitle(gameId);
+                renderBoard();
                 updateStatus(`Joined game: ${gameId}`);
                 break;
 
-            case 'update':
+            case 'updated':
                 board = data.board;
                 currentPlayer = data.currentPlayer;
+                gameId = data.gameId;
                 renderBoard();
                 if (data.winner) {
                     highlightWinner(data.winnerCombo);
@@ -86,6 +98,13 @@ $(document).ready(function () {
                 } else {
                     updateStatus(`Current Player: ${currentPlayer}`);
                 }
+                break;
+
+            case 'started':
+                updateStatus("Game started");
+                playerRole = data.role;
+                displayPlayerRole(data.role);
+
                 break;
 
             case 'error':
@@ -101,7 +120,7 @@ $(document).ready(function () {
     // Create a new game
     $('#create-game').click(function () {
         socket.send(JSON.stringify({ action: 'create' }));
-        updateStatus('Creating game...');
+        //updateStatus('Creating game...');
     });
 
     // Join an existing game

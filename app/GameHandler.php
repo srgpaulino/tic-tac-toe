@@ -42,7 +42,7 @@ class GameHandler
      *
      * @return string|null The winning player ('X' or 'O') or null if no winner.
      */
-    public function checkWinner(): ?string
+    public function checkWinner(): ?array
     {
         $winningCombinations = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
@@ -57,7 +57,7 @@ class GameHandler
                 $this->board[$a] === $this->board[$b] &&
                 $this->board[$a] === $this->board[$c]
             ) {
-                return $this->board[$a]; // Return the winner ('X' or 'O')
+                return [$this->board[$a], $combo]; // Return the winner ('X' or 'O')
             }
         }
 
