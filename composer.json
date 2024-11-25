@@ -16,10 +16,7 @@
     },
     "scripts": {
         "start-server": "php app/GameServer.php",
-        "test": "phpunit --configuration phpunit.xml",
-        "post-install-cmd": [
-            "php artisan optimize"
-        ]
+        "test": "phpunit --configuration phpunit.xml"
     },
     "minimum-stability": "stable",
     "license": "MIT"
