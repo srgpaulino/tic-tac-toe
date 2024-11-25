@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const socket = new WebSocket('ws://16.16.207.100:8084');
+    const socket = new WebSocket('wss://16.16.207.100:8084');
     let gameId = null;
     let currentPlayer = 'X';
     let playerRole = null;
