@@ -198,5 +198,5 @@ $server = IoServer::factory(
     8080
 );
 
-echo "WebSocket server started on ".getenv('WS_HOST')."\n";
+echo "WebSocket server started on 8080\n";
 $server->run();
