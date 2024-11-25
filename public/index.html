@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tic-Tac-Toe</title>
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/14.0.0/material-components-web.min.css">
+        <link rel="stylesheet" href="css/ttt.css">
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    </head>
+    <body>
+        <div class="mdc-card container">
+            <h1 class="mdc-typography--headline4">Tic-Tac-Toe</h1>
+
+            <!-- Game Controls -->
+            <div id="controls">
+                <button id="create-game" class="mdc-button mdc-button--raised">Create Game</button>
+                <div class="mdc-text-field">
+                    <input type="text" id="game-id-input" class="mdc-text-field__input" placeholder="Enter Game ID">
+                    <div class="mdc-line-ripple"></div>
+                </div>
+                <button id="join-game" class="mdc-button mdc-button--raised">Join Game</button>
+            </div>
+
+            <!-- Game Board -->
+            <h2 id="game-id-title" class="mdc-typography--subtitle2"></h2>
+            <div id="game-board" class="game-board"></div>
+
+            <!-- Status -->
+            <p id="game-status" class="mdc-typography--body1">Waiting for players...</p>
+
+            <!-- Restart Button -->
+            <button id="restart-game" class="mdc-button mdc-button--outlined hidden">Restart Game</button>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/14.0.0/material-components-web.min.js"></script>
+        <script src="js/ttt.js"></script>
+        
+    </body>
+</html>

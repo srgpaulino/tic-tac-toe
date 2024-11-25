@@ -1,0 +1,129 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.mdc-typography--headline4 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Game Controls */
+#controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.mdc-text-field {
+    width: 100%;
+}
+
+#game-id-input {
+    width: 100%;
+    font-size: 14px;
+}
+
+/* Game Board */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeeeee;
+    border-radius: 4px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.cell:hover {
+    transform: scale(1.05);
+    background-color: #e0e0e0;
+}
+
+/* Highlight Winner */
+.cell.winner {
+    background-color: #4caf50;
+    color: white;
+    animation: pulse 1s infinite;
+}
+
+/* Animation for winner cells */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Game Status */
+#game-status {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Restart Button */
+#restart-game {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+#restart-game:hover {
+    background-color: #218838;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    #game-board {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #controls input {
+        width: calc(100% - 90px);
+    }
+}
+

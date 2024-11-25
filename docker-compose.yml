@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  tic-tac-toe:
+    build: .
+    container_name: tic-tac-toe-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - PHP_MEMORY_LIMIT=512M
+    command: php app/GameServer.php
+
+  web:
+    image: php:8.2-cli
+    container_name: tic-tac-toe-web
+    volumes:
+      - ./public:/var/www/html
+    ports:
+      - "8081:8080"
+    command: php -S 0.0.0.0:8080 -t /var/www/html
