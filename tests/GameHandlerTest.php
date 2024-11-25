@@ -34,7 +34,7 @@ class GameHandlerTest extends TestCase
         $game->makeMove(1); // X
         $game->makeMove(4); // O
         $game->makeMove(2); // X wins
-        $this->assertEquals('X', $game->checkWinner());
+        $this->assertEquals('X', $game->checkWinner()[0]);
     }
 
     public function testWinningConditionForColumns()
@@ -46,7 +46,7 @@ class GameHandlerTest extends TestCase
         $game->makeMove(3); // X
         $game->makeMove(2); // O
         $game->makeMove(6); // X wins
-        $this->assertEquals('X', $game->checkWinner());
+        $this->assertEquals('X', $game->checkWinner()[0]);
     }
 
     public function testWinningConditionForDiagonals()
@@ -58,7 +58,7 @@ class GameHandlerTest extends TestCase
         $game->makeMove(4); // X
         $game->makeMove(2); // O
         $game->makeMove(8); // X wins
-        $this->assertEquals('X', $game->checkWinner());
+        $this->assertEquals('X', $game->checkWinner()[0]);
     }
 
     public function testDrawCondition()
@@ -73,7 +73,7 @@ class GameHandlerTest extends TestCase
         ];
 
         $this->assertTrue($game->isDraw());
-        $this->assertNull($game->checkWinner());
+        $this->assertNull($game->checkWinner()[0]);
     }
     
 }
