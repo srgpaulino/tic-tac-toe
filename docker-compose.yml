@@ -23,7 +23,7 @@ services:
     image: nginx:latest
     container_name: nginx-proxy
     volumes:
-    - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - "80:80"  # Serve non-secure HTTP
     depends_on:
