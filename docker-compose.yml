@@ -25,7 +25,7 @@ services:
     volumes:
     - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
-      - "80:80"  # Serve non-secure HTTP
+      - "8081:80"  # Serve non-secure HTTP
     depends_on:
       - tic-tac-toe
       - web
