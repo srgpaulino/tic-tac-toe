@@ -1,1 +1,4 @@
 /vendor/
+/.env.local
+/.env.heroku
+/build/
