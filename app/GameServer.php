@@ -60,7 +60,7 @@ class GameServer implements MessageComponentInterface
                 if (isset($this->games[$gameId])) {
                     $game = $this->games[$gameId];
     
-                    if (count($this->playerMap) <= 2) {
+                    if (count($this->playerMap) < 2) {
                         $this->playerMap[$from->resourceId] = [
                             'gameId' => $gameId,
                             'role' => 'O'
@@ -198,5 +198,5 @@ $server = IoServer::factory(
     $port
 );
 
-echo "WebSocket server started on getenv('WS_HOST')\n";
+echo "WebSocket server started on ".getenv('WS_HOST')."\n";
 $server->run();
