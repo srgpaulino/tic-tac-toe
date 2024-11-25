@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const socket = new WebSocket('ws://localhost:8080');
+    const socket = new WebSocket('wss://https://spaulino-tictactoe-30674857a67d.herokuapp.com');
     let gameId = null;
     let currentPlayer = 'X';
     let board = ['', '', '', '', '', '', '', '', ''];
