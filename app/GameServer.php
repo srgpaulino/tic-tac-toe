@@ -60,7 +60,7 @@ class GameServer implements MessageComponentInterface
                 if (isset($this->games[$gameId])) {
                     $game = $this->games[$gameId];
     
-                    if (count($this->playerMap) < 2) {
+                    if (count($this->playerMap) <= 2) {
                         $this->playerMap[$from->resourceId] = [
                             'gameId' => $gameId,
                             'role' => 'O'
