@@ -5,7 +5,7 @@ services:
     build: .
     container_name: tic-tac-toe-server
     ports:
-      - "8080:8080"
+      - "8084:8080"
     volumes:
       - .:/app
     environment:
