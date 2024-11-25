@@ -3,7 +3,7 @@
     "description": "A WebSocket-based server for a real-time Tic-Tac-Toe game.",
     "type": "project",
     "require": {
-        "php": "^7.4 || ^8.0", 
+        "php": "^8.0", 
         "cboden/ratchet": "^0.4" 
     },
     "require-dev": {
@@ -16,7 +16,10 @@
     },
     "scripts": {
         "start-server": "php app/GameServer.php",
-        "test": "phpunit --configuration phpunit.xml"
+        "test": "phpunit --configuration phpunit.xml",
+        "post-install-cmd": [
+            "php artisan optimize"
+        ]
     },
     "minimum-stability": "stable",
     "license": "MIT"

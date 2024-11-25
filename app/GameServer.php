@@ -155,13 +155,15 @@ use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 
+$port = getenv('PORT') ?: 8080; // Use Heroku's assigned port or default to 8080
+
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
             new GameServer()
         )
     ),
-    8080
+    $port
 );
 
 echo "WebSocket server started on ws://localhost:8080\n";
