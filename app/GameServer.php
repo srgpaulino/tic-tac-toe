@@ -195,7 +195,7 @@ $server = IoServer::factory(
             new GameServer()
         )
     ),
-    $port
+    8080
 );
 
 echo "WebSocket server started on ".getenv('WS_HOST')."\n";
