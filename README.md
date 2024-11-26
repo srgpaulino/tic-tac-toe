@@ -2,7 +2,9 @@
 
 A real-time, web-based Tic-Tac-Toe game for two players, built with **PHP**, **WebSockets** (Ratchet), and **jQuery**. The game allows players to create and join games remotely, play with real-time updates, and restart the game as needed. It supports reconnection handling for dropped players.
 
-Access online on 
+Access online on http://16.16.207.100:8081
+
+This exercise was done as a test for **The Skills Network**, while applying for the role as **Software Engineer**.
 
 ---
 
@@ -19,7 +21,7 @@ Access online on
 
 ## To Include
 
-- Persistent game state with MySQL.
+- Persistent game state with SQL database (MySql, MariaDB or PostgreSQL).
 - Animated UI/UX.
 - Gameplay sounds.
 - QR code share link.
@@ -63,8 +65,15 @@ Use PHP's built-in web server or any HTTP server to serve the frontend:
 php -S localhost:8081 -t public
 ```
 
+### Serve with Docker
+Using Docker, run docker compose
+```bash
+docker-compose up -d
+```
+Your project should now be running and accessible on http://localhost:8081
+
 ### Access the Game
-Open your browser and navigate to:
+Open your browser and navigate to Frontend:
 
 Frontend: http://localhost:8081
 WebSocket Server: ws://localhost:8080
