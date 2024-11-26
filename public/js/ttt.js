@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const socket = new WebSocket('ws://localhost:8080');
+    const socket = new WebSocket('ws://16.16.207.100:8080');
     let gameId = null;
     let currentPlayer = 'X';
     let playerRole = null;
