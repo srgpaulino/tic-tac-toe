@@ -2,7 +2,7 @@
 
 A real-time, web-based Tic-Tac-Toe game for two players, built with **PHP**, **WebSockets** (Ratchet), and **jQuery**. The game allows players to create and join games remotely, play with real-time updates, and restart the game as needed. It supports reconnection handling for dropped players.
 
-Access online on http://16.16.207.100:8081
+Access online [here](http://16.16.207.100:8081)
 
 This exercise was done as a test for **The Skills Network**, while applying for the role as **Software Engineer**.
 
