@@ -51,6 +51,10 @@ $(document).ready(function () {
         }
     }
 
+
+
+
+
     // WebSocket Event Handlers
     socket.onopen = function () {
         if (gameId) {
@@ -146,4 +150,16 @@ $(document).ready(function () {
 
     // Initial render of the game board
     renderBoard();
+
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        console.log(urlParams);
+        const gameId = urlParams.get("gameId");
+           
+        if (gameId) {
+            $('#game-id-input').val(gameId);
+        }
+    });
+   
+
 });
